@@ -3,7 +3,7 @@
 **An in‑browser, AI‑native analytics studio.** Drop a file, ask in plain language, and get a filtered, cross‑linked, AI‑authored **dashboard**, **report**, and **SQL workspace** — running **100% in your browser**, so your data never leaves the tab.
 
 - **Hackathon track:** Work & Productivity
-- **Live demo:** `<your *.pages.dev link>`
+- **Live demo:** https://datalens.savhascelik.workers.dev/
 - **Stack:** React + Vite, DuckDB‑WASM (local analytical DB), ECharts. Bring‑your‑own LLM key (OpenAI/GPT‑5.6, Gemini, Vertex, or local Ollama) via one OpenAI‑compatible client.
 
 ## What it does
