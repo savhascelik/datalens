@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig(({ mode }) => ({
   // react-draggable (react-grid-layout bağımlılığı) log.ts içinde process.env.DRAGGABLE_DEBUG
   // okuyor. Tarayıcıda `process` tanımsız olduğu için sürükleme başlarken hata veriyordu.
@@ -10,52 +12,49 @@ export default defineConfig(({ mode }) => ({
     'process.env.NODE_ENV': JSON.stringify(mode),
     'process.env': '{}',
   },
-  plugins: [
-    react(),
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
-      manifest: {
-        name: 'Data Lens AI',
-        short_name: 'DataLens',
-        description: 'AI-Powered Local Data Analytics & Interactive Dashboards',
-        theme_color: '#090e1b',
-        background_color: '#090e1b',
-        display: 'standalone',
-        orientation: 'any',
-        start_url: '.',
-        icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable'
-          }
-        ]
-      },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,wasm}'],
-        // DuckDB wasm files can be large, so we increase the size limit for caching
-        maximumFileSizeToCacheInBytes: 45 * 1024 * 1024,
-      }
-    })
-  ],
+  plugins: [react(), VitePWA({
+    registerType: 'autoUpdate',
+    includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
+    manifest: {
+      name: 'Data Lens AI',
+      short_name: 'DataLens',
+      description: 'AI-Powered Local Data Analytics & Interactive Dashboards',
+      theme_color: '#090e1b',
+      background_color: '#090e1b',
+      display: 'standalone',
+      orientation: 'any',
+      start_url: '.',
+      icons: [
+        {
+          src: 'pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        },
+        {
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any'
+        },
+        {
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable'
+        }
+      ]
+    },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,ico,png,svg,wasm}'],
+      // DuckDB wasm files can be large, so we increase the size limit for caching
+      maximumFileSizeToCacheInBytes: 45 * 1024 * 1024,
+    }
+  }), cloudflare()],
   optimizeDeps: {
     exclude: ['@duckdb/duckdb-wasm'],
   },
