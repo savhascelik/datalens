@@ -1,6 +1,4 @@
 import * as duckdb from '@duckdb/duckdb-wasm'
-import duckdbWasmUrl from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url'
-import duckdbWorkerUrl from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url'
 import * as XLSX from 'xlsx'
 import type { AiDashboardPlan, ColumnKind, ColumnProfile, DashboardModel, Dataset, ExecutedAiComponent, ImportProgress, QueryRow } from './types'
 import { isAllowedSql } from './sql-safety'
@@ -23,9 +21,18 @@ async function getDatabase() {
   if (initPromise) return initPromise
 
   initPromise = (async () => {
-    const worker = new Worker(duckdbWorkerUrl)
+    // DuckDB-WASM'ı jsDelivr CDN'inden yükle: ~37 MB'lık wasm uygulama paketine (dist)
+    // GÖMÜLMEZ → statik hostların dosya boyutu sınırına (Cloudflare Pages: 25 MiB/dosya)
+    // takılmaz. Worker, çapraz-köken için bir Blob sarmalayıcıyla başlatılır (duckdb-wasm
+    // resmi CDN kalıbı). selectBundle tarayıcı yeteneğine göre mvp/eh seçer.
+    const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles())
+    const workerUrl = URL.createObjectURL(
+      new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' }),
+    )
+    const worker = new Worker(workerUrl)
     const instance = new duckdb.AsyncDuckDB(new duckdb.VoidLogger(), worker)
-    await instance.instantiate(duckdbWasmUrl)
+    await instance.instantiate(bundle.mainModule, bundle.pthreadWorker)
+    URL.revokeObjectURL(workerUrl)
     database = instance
     return instance
   })()
