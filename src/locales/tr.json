@@ -119,6 +119,17 @@
   "ollamaLocalNote": "Yerel Ollama yalnızca uygulamayı da yerelde çalıştırdığınızda sorunsuz çalışır. Barındırılan (https) bir siteden erişmek için Ollama'da OLLAMA_ORIGINS değerini bu siteye (veya *) ayarlayıp Ollama'yı yeniden başlatın — aksi halde tarayıcı CORS nedeniyle engeller. Kolay yol: OpenAI/Gemini gibi bir bulut sağlayıcı seçin.",
   "ollamaCorsFetchHint": "Ollama'ya erişilemedi. Bu barındırılan (https) sitede yerel Ollama için Ollama tarafında OLLAMA_ORIGINS'i bu adrese (veya *) ayarlayıp yeniden başlatın; ya da bir bulut sağlayıcı seçin.",
   "chartAddedToReport": "Grafik rapor sayfanıza eklendi!",
+  "intro": {
+    "eyebrow": "Veriden içgörüye — tarayıcıda, saniyeler içinde",
+    "title": "Dosyanı bırak. Sor. Panoya ve rapora dönüşsün.",
+    "subtitle": "Verini yükle; yapay zekâ onu filtrelenebilir bir panoya çevirsin, oradan da paylaşılabilir bir rapora. Hepsi yerelde — verin tarayıcından çıkmaz.",
+    "data": "Veri",
+    "dataSub": "CSV / Excel / Parquet",
+    "dashboard": "Pano",
+    "dashboardSub": "AI ile widget & çapraz filtre",
+    "report": "Rapor",
+    "reportSub": "Anlatı + kart, temiz PDF"
+  },
   "tabs": {
     "files": "Dosyalar",
     "dashboard": "Anında Dashboard",

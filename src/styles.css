@@ -729,3 +729,27 @@ main {
 @media (max-width: 640px) {
   .ai-sidebar { width: 100vw; }
 }
+
+
+/* ==================== Intro Journey (landing hero animation) ==================== */
+@keyframes dljFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes dljDot { 0% { left: 2%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 98%; opacity: 0; } }
+@keyframes dljBar { from { transform: scaleY(0.15); } to { transform: scaleY(1); } }
+@keyframes dljFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes dljLine { from { background-position: 0 0; } to { background-position: 32px 0; } }
+
+.dlj-hero { animation: dljFadeUp .5s both; }
+.dlj-node { animation: dljFadeUp .6s both; }
+.dlj-icon { animation: dljFloat 3.4s ease-in-out infinite; }
+.dlj-connector { position: relative; flex: 1 1 40px; min-width: 40px; height: 3px; border-radius: 3px;
+  background-image: linear-gradient(90deg, var(--color-primary) 0 50%, transparent 0 100%);
+  background-size: 12px 3px; opacity: .5; animation: dljLine 1s linear infinite; }
+.dlj-connector .dlj-travel { position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%;
+  background: var(--color-primary); box-shadow: 0 0 10px var(--color-primary); animation: dljDot 2.4s ease-in-out infinite; }
+.dlj-bar { transform-origin: bottom; animation: dljBar .8s ease-out both; }
+
+@media (max-width: 640px) {
+  .dlj-flow { flex-direction: column !important; }
+  .dlj-connector { width: 3px; height: 34px; flex: 0 0 34px; background-image: linear-gradient(180deg, var(--color-primary) 0 50%, transparent 0 100%); background-size: 3px 12px; }
+  .dlj-connector .dlj-travel { animation: none; top: auto; bottom: -3px; left: 50%; margin-left: -5px; }
+}

@@ -119,6 +119,17 @@
   "ollamaLocalNote": "Local Ollama works smoothly only when you also run the app locally. To reach it from a hosted (https) site, set OLLAMA_ORIGINS to this site (or *) on the Ollama side and restart Ollama — otherwise the browser blocks it due to CORS. Easiest path: pick a cloud provider such as OpenAI/Gemini.",
   "ollamaCorsFetchHint": "Couldn't reach Ollama. On this hosted (https) site, set OLLAMA_ORIGINS to this address (or *) on the Ollama side and restart it — or pick a cloud provider.",
   "chartAddedToReport": "Chart added to your report!",
+  "intro": {
+    "eyebrow": "From data to insight — in your browser, in seconds",
+    "title": "Drop a file. Ask. Watch it become a dashboard and a report.",
+    "subtitle": "Load your data and let AI turn it into a filterable dashboard, then into a shareable report. All local — your data never leaves the browser.",
+    "data": "Data",
+    "dataSub": "CSV / Excel / Parquet",
+    "dashboard": "Dashboard",
+    "dashboardSub": "AI widgets & cross-filter",
+    "report": "Report",
+    "reportSub": "Narrative + cards, clean PDF"
+  },
   "tabs": {
     "files": "Files",
     "dashboard": "Instant Dashboard",
