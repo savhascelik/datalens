@@ -59,3 +59,8 @@ work/
 submission/
 outputs/
 docs/WIDGET_REFACTOR_STATE.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
