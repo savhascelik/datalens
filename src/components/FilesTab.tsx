@@ -44,6 +44,9 @@ export function FilesTab({
   deleteLocalDataset
 }: FilesTabProps) {
   const [showProfile, setShowProfile] = useState(false)
+  // Hiç veri yokken içe-aktar çekmecesini OTOMATİK açık göster (kullanıcı hemen yükleme
+  // alanını görsün). Veri varsa kullanıcının aç/kapa tercihine uyar.
+  const importExpanded = showImportBox || datasets.length === 0
 
   return (
     <div style={{ animation: 'fadeIn 0.4s', display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -241,10 +244,10 @@ export function FilesTab({
             <Upload size={16} style={{ color: 'var(--color-primary)' }} />
             {t('importNewDataset', { defaultValue: 'Yeni Veri Kümesi İçe Aktar' })}
           </span>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>{showImportBox ? t('collapse', { defaultValue: 'Gizle' }) : t('expand', { defaultValue: 'Göster' })}</span>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>{importExpanded ? t('collapse', { defaultValue: 'Gizle' }) : t('expand', { defaultValue: 'Göster' })}</span>
         </div>
         
-        {showImportBox && (
+        {importExpanded && (
           <div style={{ marginTop: '16px', animation: 'fadeIn 0.2s' }}>
             <div 
               className={`upload-zone-compact ${dragging ? 'dragging' : ''}`}
