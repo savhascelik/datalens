@@ -427,8 +427,6 @@ function App() {
           <p className="eyebrow">{t('eyebrow')}</p>
           <h1>{t('heroA')}<br />{t('heroB')} <em>{t('heroC')}</em></h1>
           <p className="hero-copy">{t('heroCopy')}</p>
-          <div className="steps">{steps.map((step, index) => <div className="step" key={step}><span>{index + 1}</span>{step}</div>)}</div>
-          <IntroJourney t={t} />
         </section>
       )}
 
@@ -439,6 +437,7 @@ function App() {
           onDragLeave={() => setDragging(false)}
           onDrop={(event) => { event.preventDefault(); setDragging(false); void loadFile(event.dataTransfer.files[0]) }}
         >
+          <IntroJourney t={t} compact />
           <div className="upload-icon">
             {dbLoading ? <LoaderCircle className="spin" size={28} /> : <Upload size={28} />}
           </div>
