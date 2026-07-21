@@ -34,4 +34,4 @@ This project was designed and implemented in an agentic loop with **Codex, power
 Your data stays in the browser (DuckDB‑WASM + IndexedDB). Only your prompts — and, if you choose, a screenshot — go to the model you configured. No backend, no server‑side secrets.
 
 ## License
-MIT — see [LICENSE](LICENSE).
+Apache License 2.0 — free to use with **attribution**; patent & trademark protections retained. See [LICENSE](LICENSE).
