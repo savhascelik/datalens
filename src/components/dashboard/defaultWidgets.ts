@@ -39,16 +39,21 @@ export function buildDefaultInstanceWidgets(dataset: Dataset): DefaultWidgetsRes
   const widgets: WidgetInstance[] = []
   const rglLayout: DefaultWidgetsResult['rglLayout'] = []
 
-  // --- Arama kutusu (en üstte, tam genişlik) — kategorik bir kolon varsa ---
-  // Panodaki tüm widget'ları 'contains' ile filtreler (ilişki üzerinden diğer tablolara da).
-  const hasSearch = Boolean(categoricCol)
-  if (hasSearch) {
+  // --- Kontrol satırı (en üstte): Arama + Dilimleyici — kategorik kolon varsa ---
+  // Arama 'contains', dilimleyici 'eq' çapraz filtre uygular; ikisi de panonun tamamını filtreler.
+  const hasControls = Boolean(categoricCol)
+  const controlH = 4 // arama girişi + dilimleyici değer listesi rahat sığsın diye yüksek tutulur
+  if (hasControls) {
     widgets.push({ id: 'search_top', type: 'search', sourceTable: table, config: { column: categoricCol } })
-    rglLayout.push({ i: 'search_top', x: 0, y: 0, w: 12, h: 2 })
+    rglLayout.push({ i: 'search_top', x: 0, y: 0, w: 6, h: controlH })
+
+    const slicerCol = secCategoricCol || categoricCol
+    widgets.push({ id: 'slicer_top', type: 'slicer', sourceTable: table, config: { column: slicerCol } })
+    rglLayout.push({ i: 'slicer_top', x: 6, y: 0, w: 6, h: controlH })
   }
 
-  // Arama varsa KPI'lar bir satır aşağıdan başlar.
-  const kpiY = hasSearch ? 2 : 0
+  // Kontroller varsa KPI'lar onların altından başlar.
+  const kpiY = hasControls ? controlH : 0
   const kpiH = 3 // içerik (etiket + büyük sayı) tam sığsın diye 2 yerine 3
 
   // --- KPI satırı ---
