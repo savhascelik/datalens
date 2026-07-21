@@ -50,6 +50,9 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const handleFetchModels = async () => {
     setIsFetchingModels(true)
     setModelsFetchStatus(null)
+    const fetchFailMsg = tempProvider === 'ollama'
+      ? t('ollamaCorsFetchHint', { defaultValue: "Ollama'ya erişilemedi. Bu barındırılan (https) sitede yerel Ollama için Ollama tarafında OLLAMA_ORIGINS'i bu adrese (veya *) ayarlayıp yeniden başlatın; ya da bir bulut sağlayıcı seçin." })
+      : t('modelsFetchFailed')
     try {
       const models = await fetchAvailableModels(tempProvider, tempBaseUrl, tempApiKey)
       setFetchedModels(models)
@@ -59,11 +62,11 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
         }
         setModelsFetchStatus({ type: 'success', message: t('modelsFetchedSuccess') })
       } else {
-        setModelsFetchStatus({ type: 'error', message: t('modelsFetchFailed') })
+        setModelsFetchStatus({ type: 'error', message: fetchFailMsg })
       }
     } catch (err) {
       console.error(err)
-      setModelsFetchStatus({ type: 'error', message: t('modelsFetchFailed') })
+      setModelsFetchStatus({ type: 'error', message: fetchFailMsg })
     } finally {
       setIsFetchingModels(false)
     }
@@ -130,6 +133,14 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <option value="ollama">{t('providerOllama', { defaultValue: 'Ollama (yerel)' })}</option>
           </select>
         </div>
+
+        {/* Ollama: barındırılan (https) sitede yerel erişim uyarısı */}
+        {tempProvider === 'ollama' && (
+          <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: '5px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '8px 10px' }}>
+            <AlertCircle size={13} style={{ flexShrink: 0, marginTop: '1px', color: '#f59e0b' }} />
+            <span>{t('ollamaLocalNote', { defaultValue: 'Yerel Ollama yalnızca uygulamayı da yerelde çalıştırdığınızda sorunsuz çalışır. Barındırılan (https) bir siteden erişmek için Ollama\'da OLLAMA_ORIGINS değerini bu siteye (veya *) ayarlayıp Ollama\'yı yeniden başlatın — aksi halde tarayıcı CORS nedeniyle engeller. Kolay yol: OpenAI/Gemini gibi bir bulut sağlayıcı seçin.' })}</span>
+          </p>
+        )}
 
         {/* Vertex: proje + bölge */}
         {tempProvider === 'vertex' && (

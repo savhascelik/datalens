@@ -116,6 +116,8 @@
   "manualModelEntry": "Enter manually",
   "modelsFetchedSuccess": "Models fetched successfully!",
   "modelsFetchFailed": "Could not auto-fetch models. Please make sure your custom URL is correct or Ollama is running in background.",
+  "ollamaLocalNote": "Local Ollama works smoothly only when you also run the app locally. To reach it from a hosted (https) site, set OLLAMA_ORIGINS to this site (or *) on the Ollama side and restart Ollama — otherwise the browser blocks it due to CORS. Easiest path: pick a cloud provider such as OpenAI/Gemini.",
+  "ollamaCorsFetchHint": "Couldn't reach Ollama. On this hosted (https) site, set OLLAMA_ORIGINS to this address (or *) on the Ollama side and restart it — or pick a cloud provider.",
   "chartAddedToReport": "Chart added to your report!",
   "tabs": {
     "files": "Files",
@@ -323,6 +325,8 @@
     "attach": "Attach widget/dashboard screenshot",
     "micStart": "Dictate (voice to text)",
     "micStop": "Stop listening",
+    "ollamaUnreachable": "Couldn't reach Ollama. To use a local Ollama from a hosted (https) site, set OLLAMA_ORIGINS to this site (or *) on the Ollama side and restart it — or pick a cloud model (OpenAI/Gemini) in Settings.",
+    "networkError": "Couldn't reach the model (network/CORS). Check the base URL, API key and provider in Settings.",
     "attachedImage": "Screenshot",
     "removeAttachment": "Remove attachment",
     "wholeDashboard": "Whole dashboard",

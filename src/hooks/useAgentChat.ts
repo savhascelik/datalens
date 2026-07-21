@@ -7,6 +7,7 @@ import { runAgentLoop, resumeAgentLoop, type AgentPending } from '../ai/agent/ag
 import type { StopReason } from '../ai/agent/budgetGuard'
 import type { ChatMessage } from '../ai/llm/chatClient'
 import { executeCapability } from '../ai/capabilities/registry'
+import { getAiSettings } from '../ai-client'
 import i18n from '../i18n'
 
 export interface ChatEntry {
@@ -120,7 +121,17 @@ export function useAgentChat() {
     } catch (err: any) {
       pendingRef.current = null
       setAwaitingAnswer(false)
-      push({ role: 'status', text: i18n.t('ai.error', { msg: err?.message ?? err }) })
+      const raw = String(err?.message ?? err)
+      const isNetwork = /failed to fetch|networkerror|load failed|err_failed/i.test(raw)
+      let text: string
+      if (isNetwork) {
+        text = getAiSettings().provider === 'ollama'
+          ? i18n.t('ai.ollamaUnreachable', { defaultValue: "Ollama'ya erişilemedi. Barındırılan (https) bir sitede yerel Ollama'yı kullanmak için Ollama tarafında OLLAMA_ORIGINS değerini bu siteye (veya *) ayarlayıp yeniden başlatın; ya da Ayarlar'dan bir bulut modeli (OpenAI/Gemini) seçin." })
+          : i18n.t('ai.networkError', { defaultValue: "Modele erişilemedi (ağ/CORS). Ayarlar'daki uç nokta (base URL), anahtar ve sağlayıcıyı kontrol edin." })
+      } else {
+        text = i18n.t('ai.error', { msg: raw })
+      }
+      push({ role: 'status', text })
     } finally {
       setIsRunning(false)
       setStatus(null)

@@ -116,6 +116,8 @@
   "manualModelEntry": "Yazarak girmek istiyorum",
   "modelsFetchedSuccess": "Modeller başarıyla çekildi!",
   "modelsFetchFailed": "Modeller otomatik alınamadı. Lütfen API URL'sinin doğru veya Ollama'nın arka planda açık olduğundan emin olun.",
+  "ollamaLocalNote": "Yerel Ollama yalnızca uygulamayı da yerelde çalıştırdığınızda sorunsuz çalışır. Barındırılan (https) bir siteden erişmek için Ollama'da OLLAMA_ORIGINS değerini bu siteye (veya *) ayarlayıp Ollama'yı yeniden başlatın — aksi halde tarayıcı CORS nedeniyle engeller. Kolay yol: OpenAI/Gemini gibi bir bulut sağlayıcı seçin.",
+  "ollamaCorsFetchHint": "Ollama'ya erişilemedi. Bu barındırılan (https) sitede yerel Ollama için Ollama tarafında OLLAMA_ORIGINS'i bu adrese (veya *) ayarlayıp yeniden başlatın; ya da bir bulut sağlayıcı seçin.",
   "chartAddedToReport": "Grafik rapor sayfanıza eklendi!",
   "tabs": {
     "files": "Dosyalar",
@@ -323,6 +325,8 @@
     "attach": "Widget/pano ekran görüntüsü ekle",
     "micStart": "Mikrofonla yaz (sesle)",
     "micStop": "Dinlemeyi durdur",
+    "ollamaUnreachable": "Ollama'ya erişilemedi. Barındırılan (https) bir sitede yerel Ollama için Ollama tarafında OLLAMA_ORIGINS değerini bu siteye (veya *) ayarlayıp yeniden başlatın; ya da Ayarlar'dan bir bulut modeli (OpenAI/Gemini) seçin.",
+    "networkError": "Modele erişilemedi (ağ/CORS). Ayarlar'daki uç nokta (base URL), anahtar ve sağlayıcıyı kontrol edin.",
     "attachedImage": "Ekran görüntüsü",
     "removeAttachment": "Eki kaldır",
     "wholeDashboard": "Tüm pano",
