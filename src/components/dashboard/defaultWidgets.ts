@@ -39,33 +39,47 @@ export function buildDefaultInstanceWidgets(dataset: Dataset): DefaultWidgetsRes
   const widgets: WidgetInstance[] = []
   const rglLayout: DefaultWidgetsResult['rglLayout'] = []
 
-  // --- KPI satırı (en üstte) ---
+  // --- Arama kutusu (en üstte, tam genişlik) — kategorik bir kolon varsa ---
+  // Panodaki tüm widget'ları 'contains' ile filtreler (ilişki üzerinden diğer tablolara da).
+  const hasSearch = Boolean(categoricCol)
+  if (hasSearch) {
+    widgets.push({ id: 'search_top', type: 'search', sourceTable: table, config: { column: categoricCol } })
+    rglLayout.push({ i: 'search_top', x: 0, y: 0, w: 12, h: 2 })
+  }
+
+  // Arama varsa KPI'lar bir satır aşağıdan başlar.
+  const kpiY = hasSearch ? 2 : 0
+  const kpiH = 3 // içerik (etiket + büyük sayı) tam sığsın diye 2 yerine 3
+
+  // --- KPI satırı ---
   widgets.push({ id: 'kpi_count', type: 'kpi', sourceTable: table, config: { column: '', aggregation: 'count', format: 'number' } })
-  rglLayout.push({ i: 'kpi_count', x: 0, y: 0, w: 4, h: 2 })
+  rglLayout.push({ i: 'kpi_count', x: 0, y: kpiY, w: 4, h: kpiH })
 
   if (numericCol) {
     widgets.push({ id: 'kpi_sum', type: 'kpi', sourceTable: table, config: { column: numericCol, aggregation: 'sum', format: 'number' } })
-    rglLayout.push({ i: 'kpi_sum', x: 4, y: 0, w: 4, h: 2 })
+    rglLayout.push({ i: 'kpi_sum', x: 4, y: kpiY, w: 4, h: kpiH })
   }
   if (categoricCol) {
     widgets.push({ id: 'kpi_distinct', type: 'kpi', sourceTable: table, config: { column: categoricCol, aggregation: 'count-distinct' as any, format: 'number' } })
-    rglLayout.push({ i: 'kpi_distinct', x: 8, y: 0, w: 4, h: 2 })
+    rglLayout.push({ i: 'kpi_distinct', x: 8, y: kpiY, w: 4, h: kpiH })
   }
 
   // --- Grafikler ---
+  const chartY = kpiY + kpiH
   if (categoricCol) {
     widgets.push({ id: 'chartBar', type: 'bar', sourceTable: table, config: { xColumn: categoricCol, yColumn: numericCol || undefined, aggregation: 'sum' } })
-    rglLayout.push({ i: 'chartBar', x: 0, y: 2, w: 6, h: 7 })
+    rglLayout.push({ i: 'chartBar', x: 0, y: chartY, w: 6, h: 7 })
   }
   const lineX = dateCol || secCategoricCol || categoricCol
   if (lineX) {
     widgets.push({ id: 'chartLine', type: 'line', sourceTable: table, config: { xColumn: lineX, yColumn: numericCol || undefined, aggregation: 'sum' } })
-    rglLayout.push({ i: 'chartLine', x: 6, y: 2, w: 6, h: 7 })
+    rglLayout.push({ i: 'chartLine', x: 6, y: chartY, w: 6, h: 7 })
   }
 
   // --- Detay tablo (her zaman) ---
+  const tableY = chartY + 7
   widgets.push({ id: 'table', type: 'table', sourceTable: table, config: {} })
-  rglLayout.push({ i: 'table', x: 0, y: 9, w: 12, h: 8 })
+  rglLayout.push({ i: 'table', x: 0, y: tableY, w: 12, h: 8 })
 
   return { widgets, rglLayout }
 }
