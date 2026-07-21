@@ -1,0 +1,61 @@
+# ─────────────────────────────────────────────────────────────
+# Dependencies & build output
+# ─────────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+
+# TypeScript / Vite
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+.vite/
+.cache/
+
+# ─────────────────────────────────────────────────────────────
+# Environment & secrets  (keep the example, ignore real values)
+# ─────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────────────────────────
+# Logs & OS / editor cruft
+# ─────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+coverage/
+
+# ─────────────────────────────────────────────────────────────
+# AI tooling data  (do NOT publish agent/assistant working data)
+# ─────────────────────────────────────────────────────────────
+.codex/
+.agents/
+.cursor/
+.claude/
+.windsurf/
+.aider*
+.continue/
+
+# ─────────────────────────────────────────────────────────────
+# Internal / scratch  (not part of the shipped app)
+# ─────────────────────────────────────────────────────────────
+work/
+
+# ─────────────────────────────────────────────────────────────
+# NOT FOR THE JURY: submission prep, planning & internal docs
+# (kept locally, never pushed to the public judging repo)
+# ─────────────────────────────────────────────────────────────
+submission/
+outputs/
+docs/WIDGET_REFACTOR_STATE.md
