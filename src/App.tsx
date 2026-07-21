@@ -9,6 +9,7 @@ import { SqlLabTab } from './components/SqlLabTab'
 import { ReportsTab } from './components/ReportsTab'
 import { SettingsModal } from './components/SettingsModal'
 import { AiChat } from './components/AiChat'
+import { IntroJourney } from './components/IntroJourney'
 import { buildDefaultInstanceWidgets } from './components/dashboard/defaultWidgets'
 import { onChatAttachment, type ChatAttachment } from './ai/attachmentBus'
 import { importFile, importGoogleSheet, getVirtualFileBytes, rehydrateLocalDataset, dropTable } from './data-engine'
@@ -427,6 +428,7 @@ function App() {
           <h1>{t('heroA')}<br />{t('heroB')} <em>{t('heroC')}</em></h1>
           <p className="hero-copy">{t('heroCopy')}</p>
           <div className="steps">{steps.map((step, index) => <div className="step" key={step}><span>{index + 1}</span>{step}</div>)}</div>
+          <IntroJourney t={t} />
         </section>
       )}
 

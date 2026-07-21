@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Database, Trash2, Upload, BarChart3 } from 'lucide-react'
 import type { Dataset } from '../types'
 import { ProfileTab } from './ProfileTab'
-import { IntroJourney } from './IntroJourney'
 
 interface FilesTabProps {
   datasets: Dataset[]
@@ -50,9 +49,6 @@ export function FilesTab({
 
   return (
     <div style={{ animation: 'fadeIn 0.4s', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* Anasayfa yolculuk animasyonu — yalnızca henüz veri yokken (landing anı) */}
-      {datasets.length === 0 && <IntroJourney t={t} />}
-
       {/* Workspace Title Header */}
       <div className="dataset-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
