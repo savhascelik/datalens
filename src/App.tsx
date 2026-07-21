@@ -512,11 +512,11 @@ function App() {
       ) : (
         <section className="workspace" style={{ marginTop: '20px' }}>
           {/* MAIN WORKSPACE TABS */}
-          <div style={{ display: 'flex', gap: '10px', background: 'var(--bg-secondary)', padding: '6px', borderRadius: '12px', border: '1px solid var(--border-color)', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', background: 'var(--bg-secondary)', padding: '6px', borderRadius: '12px', border: '1px solid var(--border-color)', marginBottom: '24px' }}>
             <button 
               onClick={() => setActiveWorkspaceTab('files')}
               style={{
-                flex: 1,
+                flex: '1 1 130px',
                 padding: '12px',
                 background: activeWorkspaceTab === 'files' ? 'var(--border-strong)' : 'transparent',
                 border: 0,
@@ -538,7 +538,7 @@ function App() {
             <button 
               onClick={() => setActiveWorkspaceTab('dashboard')}
               style={{
-                flex: 1,
+                flex: '1 1 130px',
                 padding: '12px',
                 background: activeWorkspaceTab === 'dashboard' ? 'var(--border-strong)' : 'transparent',
                 border: 0,
@@ -560,7 +560,7 @@ function App() {
             <button 
               onClick={() => setActiveWorkspaceTab('reports')}
               style={{
-                flex: 1,
+                flex: '1 1 130px',
                 padding: '12px',
                 background: activeWorkspaceTab === 'reports' ? 'var(--border-strong)' : 'transparent',
                 border: 0,
@@ -582,7 +582,7 @@ function App() {
             <button 
               onClick={() => setActiveWorkspaceTab('sqllab')}
               style={{
-                flex: 1,
+                flex: '1 1 130px',
                 padding: '12px',
                 background: activeWorkspaceTab === 'sqllab' ? 'var(--border-strong)' : 'transparent',
                 border: 0,

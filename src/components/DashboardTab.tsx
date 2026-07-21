@@ -1257,6 +1257,7 @@ export function DashboardTab({
           isDraggable
           isResizable
           draggableHandle=".drag-handle"
+          draggableCancel=".capture-exclude"
           resizeHandles={['se']}
           compactType="vertical"
           margin={[16, 16]}
