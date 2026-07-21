@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://datalens.savhascelik.workers.dev/sitemap.xml
